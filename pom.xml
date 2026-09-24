@@ -78,6 +78,16 @@
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
           <version>${spring-boot.version}</version>
+          <!-- Parent does NOT use spring-boot-starter-parent, so the repackage
+               execution is not inherited automatically; bind it here so every
+               child that declares the plugin produces an executable fat jar. -->
+          <executions>
+            <execution>
+              <goals>
+                <goal>repackage</goal>
+              </goals>
+            </execution>
+          </executions>
         </plugin>
       </plugins>
     </pluginManagement>
