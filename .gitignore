@@ -13,8 +13,9 @@ target/
 node_modules/
 dist/
 
-# Environment
+# Environment (local-only: secrets live here, never commit)
 .env
+.env.*
 
 # Logs
 *.log
