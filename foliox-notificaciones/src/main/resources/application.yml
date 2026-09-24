@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: foliox-notificaciones
+server:
+  port: 8086

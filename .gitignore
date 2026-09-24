@@ -1,0 +1,24 @@
+# Build output
+target/
+*.class
+
+# IDE - IntelliJ
+.idea/
+*.iml
+
+# IDE - VS Code
+.vscode/
+
+# Dependencies / frontend
+node_modules/
+dist/
+
+# Environment
+.env
+
+# Logs
+*.log
+
+# OS junk
+Thumbs.db
+.DS_Store

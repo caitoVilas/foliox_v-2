@@ -1,0 +1,44 @@
+quiero construir una app para asistencia de abogados dentro de un estudio donde podrán crear y ver expedientes crear y ver documentos y asociarlos a un expediente mantener una agenda y recibir notificaciones los usuarios serán los abogados y asistentes.
+ Alcances: 
+ Expedientes:
+- Se podrán crear estudios junto a usuario (abogado) que tendrá el rol de administrador.
+- el administrador podrá crear usuarios que pertenecerán al estudio, ejemplo otros abogados y asistentes a quienes invitara vía email a completar su registración para quedar activos
+- Se podrán crear Expedientes  que incluirán los campos :
+  fuero que pueden ser: CIVIL, PENAL, LABORAL, ADMINISTRATIVO, FAMILIAS y COMERCIAL
+  estado pueden ser: INGRESADO, EN_TRAMITE, EN_SUBSANA, PARA_RESOLVER y CERRADO
+- los expedientes se podrán consultar por todos los roles, y estos pueden presentar todos los documentos asociados solo podrán ser eliminados por el administrador
+ Documentos:
+-se podrán guardar documentos y se podrán guardar plantillas todo en formato PDF para ser reutilizadas como base de documentos nuevos y permitir cambiar campos clave
+ para no tener que volver a generar el documento entero sino que pueda reutilizarse cambiando los datos de los campos variables.
+- Las plantillas tendrán un id, el tipo, el contenido, versión, activo.
+- Los documentos tendrán los campos id, id del estudio, id del expediente al que se asocia el nombre del archivo y la ubicación.
+- Los documentos pueden ser creados y consultados y modificados pero deben pertenecer al estudio.
+- Las plantillas pueden crearse, consultarse y modificarse sin restricción de que deben pertenecer al estudio.
+- La baja de documentos puede ser efectuado por el usuario ADMIN o por ABOGADO o ASISTENTE solo si el estado del expediente fuera CERRADO.  
+
+ Agenda
+- la agenda permitirá crear tareas con los campos id, id del estudio, titulo, descripción, tipo, fecha/hora, id del expediente asociado,
+  id del responsable, estado, al crearse la tarea debe enviar una notificación al servicio de notificaciones.
+- pueden consultarse por rango de fechas, id del responsable, estado o expediente
+  deben permitir cambiar el estado
+Servicio de notificaciones
+utilizara la mensajería por Kafka y tendrá la tarea de enviar todas la notificaciones a los usuarios cono enviar emails
+
+ Usuarios:
+- los usuarios podrán autenticarse por email y password, se generara un token con 2hs. de duración
+- los usuarios ABOGADO Y ASISTENTE podrán consultar y editar sus datos y no podrán ver ni cambiar datos de otros usuarios ni cambiar el rol.
+- el usuario ADMIN podrá ver todos los usuarios, eliminar y otorgar el rol que crea necesario para otros usuarios siempre que pertenezcan a su estudio.
+
+Arquitectura:
+ - backend : utilizaremos Java 25 con spring boot 4.1.0 con webflux, Maven en una arquitectura de microservicios con Spring Security con Oauth2,
+             todos los servicios implementara una documentacion con springdoc-openapi-starter-webflux-ui version 3.1.0.
+             Utilizaremos para mensajeria Apache Kafka 4.3.1
+	     Utilizaremos Minio para generar un bucket en un contenedor docker para guardar los documentos
+- frontend: Utilizaremos React, el front debe generar un editor para crear plantillas y documentos en formato PDF.
+            deje en los archivos ejemplo.png y login.png un ejemplo de diseño para las pantallasm, el logo de foliox se encuentra en el archivo folio.png
+
+Reglas:
+ - no se podra cambiar la version de ninguna de las que se piden especificamente	
+ - Todos los servicios deben implementar sus correspondientes pruebas y generar la documentación en un archivo .md
+
+ 
