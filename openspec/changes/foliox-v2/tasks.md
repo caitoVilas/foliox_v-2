@@ -4,7 +4,7 @@ Fuente: spects.txt. El usuario aprueba tarea por tarea.
 ## Fase 0 — Cimientos
 - [x] 1. Scaffolding Maven multi-module: parent + common + stubs (auth, usuarios, expedientes, documentos, agenda, notificaciones, gateway); Java 25 / Boot 4.1.0 / WebFlux / springdoc 3.1.0
 - [x] 2. Docker Compose: PostgreSQL, Kafka 4.3.1 (KRaft, sin ZooKeeper), MinIO
-- [ ] 3. Módulo common: enums (Fuero, EstadoExpediente, EstadoTarea, Rol), DTOs error, excepciones — dep: 1
+- [x] 3. Módulo common: enums (Fuero, EstadoExpediente, EstadoTarea, Rol), DTOs error, excepciones — dep: 1
 
 ## Fase 1 — Auth + Usuarios
 - [ ] 4. Auth service: Authorization Server propio, login email/password, JWT 2hs — dep: 1,3
