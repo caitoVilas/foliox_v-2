@@ -1,5 +1,18 @@
 spring:
   application:
     name: foliox-auth
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/foliox_auth
+    username: ${POSTGRES_USER:foliox}
+    password: ${POSTGRES_PASSWORD:foliox}
+  sql:
+    init:
+      mode: always
+
+foliox:
+  auth:
+    issuer: http://localhost:8081
+    token-ttl: 2h
+
 server:
   port: 8081
