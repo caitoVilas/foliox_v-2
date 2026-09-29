@@ -1,4 +1,4 @@
-package com.foliox.auth.user;
+package com.foliox.usuarios.usuario;
 
 import java.util.UUID;
 

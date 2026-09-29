@@ -28,6 +28,7 @@ public class FolioxUserDetailsService implements ReactiveUserDetailsService {
                         usuario.getPassword(),
                         usuario.getNombre(),
                         Rol.valueOf(usuario.getRol()),
-                        Boolean.TRUE.equals(usuario.getActivo())));
+                        Boolean.TRUE.equals(usuario.getActivo()),
+                        usuario.getEstudioId()));
     }
 }
