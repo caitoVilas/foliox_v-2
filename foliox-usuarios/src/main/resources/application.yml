@@ -1,6 +1,11 @@
 spring:
   application:
     name: foliox-usuarios
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8081/oauth2/jwks
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/foliox_usuarios
     username: ${POSTGRES_USER:foliox}
