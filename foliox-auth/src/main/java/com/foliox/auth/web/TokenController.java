@@ -44,11 +44,39 @@ public class TokenController {
         this.authProperties = authProperties;
     }
 
+    @io.swagger.v3.oas.annotations.Operation(
+            summary = "Obtener un access token (ROPC password grant)",
+            description = "Autentica usuario y contraseña y devuelve un JWT de 2 horas. "
+                    + "Errores RFC 6749 §5.2: 400 invalid_grant / unsupported_grant_type, 401 invalid_client.")
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(
+            required = true,
+            content = @io.swagger.v3.oas.annotations.media.Content(
+                    mediaType = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
+                    schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = TokenForm.class)))
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "200",
+            description = "Token emitido",
+            content = @io.swagger.v3.oas.annotations.media.Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = TokenResponse.class)))
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "400",
+            description = "invalid_grant / unsupported_grant_type / invalid_request / invalid_scope",
+            content = @io.swagger.v3.oas.annotations.media.Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = OAuthError.class)))
+    @io.swagger.v3.oas.annotations.responses.ApiResponse(
+            responseCode = "401",
+            description = "invalid_client",
+            content = @io.swagger.v3.oas.annotations.media.Content(
+                    mediaType = MediaType.APPLICATION_JSON_VALUE,
+                    schema = @io.swagger.v3.oas.annotations.media.Schema(implementation = OAuthError.class)))
     @PostMapping(
             value = "/oauth2/token",
             consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Mono<ResponseEntity<?>> token(ServerWebExchange exchange) {
+    public Mono<ResponseEntity<?>> token(
+            @io.swagger.v3.oas.annotations.Parameter(hidden = true) ServerWebExchange exchange) {
         return exchange.getFormData().flatMap(form -> {
             String grantType = form.getFirst("grant_type");
             String clientId = form.getFirst("client_id");
