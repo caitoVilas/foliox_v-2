@@ -18,18 +18,31 @@ public class FolioxUserDetails implements UserDetails {
     private final String nombre;
     private final Rol rol;
     private final boolean activo;
+    private final UUID estudioId;
 
-    public FolioxUserDetails(UUID id, String email, String password, String nombre, Rol rol, boolean activo) {
+    public FolioxUserDetails(
+            UUID id,
+            String email,
+            String password,
+            String nombre,
+            Rol rol,
+            boolean activo,
+            UUID estudioId) {
         this.id = id;
         this.email = email;
         this.password = password;
         this.nombre = nombre;
         this.rol = rol;
         this.activo = activo;
+        this.estudioId = estudioId;
     }
 
     public UUID getId() {
         return id;
+    }
+
+    public UUID getEstudioId() {
+        return estudioId;
     }
 
     public String getEmail() {

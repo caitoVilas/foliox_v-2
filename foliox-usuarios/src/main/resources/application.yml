@@ -1,5 +1,13 @@
 spring:
   application:
     name: foliox-usuarios
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/foliox_usuarios
+    username: ${POSTGRES_USER:foliox}
+    password: ${POSTGRES_PASSWORD:foliox}
+  sql:
+    init:
+      mode: always
+
 server:
   port: 8082

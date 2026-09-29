@@ -1,5 +1,6 @@
-package com.foliox.auth.user;
+package com.foliox.usuarios.estudio;
 
+import java.time.Instant;
 import java.util.UUID;
 
 import lombok.Getter;
@@ -9,21 +10,13 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Getter
 @Setter
-@Table("usuarios")
-public class Usuario {
+@Table("estudios")
+public class Estudio {
 
     @Id
     private UUID id;
 
-    private String email;
-
-    private String password;
-
     private String nombre;
 
-    private String rol;
-
-    private Boolean activo;
-
-    private UUID estudioId;
+    private Instant creadoEn;
 }
