@@ -34,8 +34,9 @@ public class SecurityConfig {
         http
                 .authorizeExchange(exchanges -> exchanges
                         .pathMatchers(
-                                "/api/auth/login",
+                                "/oauth2/token",
                                 "/oauth2/jwks",
+                                "/.well-known/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
                                 "/swagger-ui.html",

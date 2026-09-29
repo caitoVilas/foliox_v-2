@@ -5,5 +5,8 @@ import java.time.Duration;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix = "foliox.auth")
-public record AuthProperties(String issuer, Duration tokenTtl) {
+public record AuthProperties(String issuer, Duration tokenTtl, Client client) {
+
+    public record Client(String id, String secret, String defaultScope) {
+    }
 }

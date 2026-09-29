@@ -13,6 +13,10 @@ foliox:
   auth:
     issuer: http://localhost:8081
     token-ttl: 2h
+    client:
+      id: ${FOLIOX_CLIENT_ID:foliox-web}
+      secret: ${FOLIOX_CLIENT_SECRET:}
+      default-scope: access
 
 server:
   port: 8081
