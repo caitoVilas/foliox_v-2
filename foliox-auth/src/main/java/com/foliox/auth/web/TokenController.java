@@ -125,6 +125,7 @@ public class TokenController {
                 .claim("email", user.getEmail())
                 .claim("nombre", user.getNombre())
                 .claim("rol", user.getRol().name())
+                .claim("estudio_id", user.getEstudioId().toString())
                 .build();
         var jwt = jwtEncoder.encode(JwtEncoderParameters.from(
                 JwsHeader.with(SignatureAlgorithm.RS256).build(),
