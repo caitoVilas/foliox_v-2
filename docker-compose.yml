@@ -6,7 +6,7 @@ name: foliox
 services:
   # ---------- PostgreSQL 16: one instance, one database per service ----------
   postgres:
-    image: postgres:16
+    image: postgres:17-alpine
     container_name: foliox-postgres
     restart: unless-stopped
     environment:
