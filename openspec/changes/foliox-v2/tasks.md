@@ -10,7 +10,7 @@ Fuente: spects.txt. El usuario aprueba tarea por tarea.
 - [x] 4. Auth service: Authorization Server propio OAuth2 (ROPC password grant, reactivo WebFlux), login email/password, JWT 2hs — dep: 1,3
 - [x] 5. Creación de estudio + admin ("Crear estudio" del login) — dep: 4
 - [ ] 6. Invitaciones por email: link caducado, reenvío, activación — dep: 4,5
-- [ ] 7. Usuarios service: CRUD, roles ADMIN/ABOGADO/ASISTENTE, multi-tenant, Resource Server — dep: 4,5
+- [x] 7. Usuarios service: CRUD, roles ADMIN/ABOGADO/ASISTENTE, multi-tenant, Resource Server — dep: 4,5
 
 ## Fase 2 — Expedientes
 - [ ] 8. Expedientes service: crear/consultar con filtros (fuero/estado), borrado solo ADMIN — dep: 7
