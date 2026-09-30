@@ -63,6 +63,28 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(resolved).body(error);
     }
 
+    @ExceptionHandler(com.foliox.common.exception.ForbiddenOperationException.class)
+    public ResponseEntity<ApiError> handleForbidden(
+            com.foliox.common.exception.ForbiddenOperationException ex, ServerWebExchange exchange) {
+        ApiError error = ApiError.of(
+                HttpStatus.FORBIDDEN.value(),
+                HttpStatus.FORBIDDEN.getReasonPhrase(),
+                ex.getMessage(),
+                path(exchange));
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(error);
+    }
+
+    @ExceptionHandler(com.foliox.common.exception.ResourceNotFoundException.class)
+    public ResponseEntity<ApiError> handleNotFound(
+            com.foliox.common.exception.ResourceNotFoundException ex, ServerWebExchange exchange) {
+        ApiError error = ApiError.of(
+                HttpStatus.NOT_FOUND.value(),
+                HttpStatus.NOT_FOUND.getReasonPhrase(),
+                ex.getMessage(),
+                path(exchange));
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
     private String path(ServerWebExchange exchange) {
         return exchange.getRequest().getPath().value();
     }
