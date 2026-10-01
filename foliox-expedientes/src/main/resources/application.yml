@@ -1,5 +1,18 @@
 spring:
   application:
     name: foliox-expedientes
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8081/oauth2/jwks
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/foliox_expedientes
+    username: ${POSTGRES_USER:foliox}
+    password: ${POSTGRES_PASSWORD:foliox}
+  sql:
+    init:
+      mode: always
+
 server:
   port: 8083
