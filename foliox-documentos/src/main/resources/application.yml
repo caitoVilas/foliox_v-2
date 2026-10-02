@@ -1,5 +1,34 @@
 spring:
   application:
     name: foliox-documentos
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          jwk-set-uri: http://localhost:8081/oauth2/jwks
+  r2dbc:
+    url: r2dbc:postgresql://localhost:5432/foliox_documentos
+    username: ${POSTGRES_USER:foliox}
+    password: ${POSTGRES_PASSWORD:foliox}
+  sql:
+    init:
+      mode: always
+  codec:
+    # Decision 4: single source for the upload cap (JSON + non-file parts).
+    max-in-memory-size: 25MB
+  webflux:
+    multipart:
+      # Decision 4: no disk spill under the cap (file parts skip the codec limit).
+      max-in-memory-size: 25MB
+
 server:
   port: 8084
+
+app:
+  minio:
+    endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
+    access-key: ${MINIO_ROOT_USER:foliox}
+    secret-key: ${MINIO_ROOT_PASSWORD:foliox12345}
+    bucket: ${MINIO_DEFAULT_BUCKET:documentos}
+  expedientes:
+    base-url: ${EXPEDIENTES_URL:http://localhost:8083}
