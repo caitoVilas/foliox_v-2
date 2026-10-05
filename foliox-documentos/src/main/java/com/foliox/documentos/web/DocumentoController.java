@@ -29,6 +29,7 @@ import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.server.ServerWebInputException;
 
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -51,10 +52,10 @@ public class DocumentoController {
     @ResponseStatus(HttpStatus.CREATED)
     public Mono<DocumentoResponse> crear(
             @RequestPart("file") FilePart file,
-            @RequestPart("expedienteId") UUID expedienteId,
+            @RequestPart("expedienteId") String expedienteIdRaw,
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token,
             @AuthenticationPrincipal Jwt jwt) {
-        return documentoService.crear(estudioId(jwt), expedienteId, file, token);
+        return documentoService.crear(estudioId(jwt), parseUuid(expedienteIdRaw), file, token);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -93,6 +94,19 @@ public class DocumentoController {
             @RequestHeader(HttpHeaders.AUTHORIZATION) String token,
             @AuthenticationPrincipal Jwt jwt) {
         return documentoService.eliminar(id, estudioId(jwt), token, isAdmin(jwt));
+    }
+
+    /**
+     * Multipart text parts arrive without a Content-Type, which the framework binds as
+     * {@code application/octet-stream}; a {@code UUID} request part therefore fails with
+     * 415 before reaching this method. Bind as {@code String} and parse explicitly.
+     */
+    private static UUID parseUuid(String raw) {
+        try {
+            return UUID.fromString(raw);
+        } catch (IllegalArgumentException e) {
+            throw new ServerWebInputException("expedienteId no es un UUID válido");
+        }
     }
 
     /** Tenancy comes only from the JWT claim — body {@code estudio_id} is ignored. */
