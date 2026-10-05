@@ -19,6 +19,7 @@ dist/
 
 # Logs
 *.log
+/logs/
 
 # OS junk
 Thumbs.db
