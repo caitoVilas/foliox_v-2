@@ -9,7 +9,7 @@ spring:
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/foliox_documentos
     username: ${POSTGRES_USER:foliox}
-    password: ${POSTGRES_PASSWORD:foliox}
+    password: ${POSTGRES_PASSWORD}
   sql:
     init:
       mode: always
@@ -28,7 +28,12 @@ app:
   minio:
     endpoint: ${MINIO_ENDPOINT:http://localhost:9000}
     access-key: ${MINIO_ROOT_USER:foliox}
-    secret-key: ${MINIO_ROOT_PASSWORD:foliox12345}
+    secret-key: ${MINIO_ROOT_PASSWORD}
     bucket: ${MINIO_DEFAULT_BUCKET:documentos}
   expedientes:
     base-url: ${EXPEDIENTES_URL:http://localhost:8083}
+
+# Fail-fast al arrancar: ademas de spring.r2dbc.password (siempre validado),
+# el secret de MinIO debe resolver a un valor real.
+foliox:
+  required-properties: app.minio.secret-key

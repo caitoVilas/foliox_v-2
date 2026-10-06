@@ -9,7 +9,7 @@ spring:
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/foliox_expedientes
     username: ${POSTGRES_USER:foliox}
-    password: ${POSTGRES_PASSWORD:foliox}
+    password: ${POSTGRES_PASSWORD}
   sql:
     init:
       mode: always
