@@ -5,11 +5,17 @@ Stack de desarrollo: PostgreSQL 16, Kafka 4.3.1 (KRaft, sin ZooKeeper), MinIO.
 ## Arrancar / parar / reiniciar
 
 ```bash
+Copy-Item .env.example .env   # UNA sola vez: completar credenciales reales
 docker compose up -d      # arranca todo (no espera: para esperar healthy usa `up -d --wait`)
 docker compose ps         # estado: todas las services en "healthy"
 docker compose down       # para sin borrar datos
 docker compose down -v    # PARA Y BORRA los datos (reset total)
 ```
+
+Sin `.env` el arranque **falla rápido a propósito**: `POSTGRES_PASSWORD` y
+`MINIO_ROOT_PASSWORD` no tienen default en `docker-compose.yml` (`${VAR:?}`).
+Lo mismo aplica a los servicios Spring: sus `application.yml` no tienen default
+y abortan el boot si falta un secreto (ver `.env.example` para la lista completa).
 
 La primera ejecución tarda más (pull de imágenes + creación de BDs y bucket).
 
@@ -17,9 +23,9 @@ La primera ejecución tarda más (pull de imágenes + creación de BDs y bucket)
 
 | Servicio   | Desde el host            | Credenciales                |
 |------------|--------------------------|-----------------------------|
-| PostgreSQL | `localhost:5432`         | `foliox` / `foliox`         |
+| PostgreSQL | `localhost:5432`         | ver `.env` (`POSTGRES_*`)   |
 | Kafka      | `localhost:9092`         | sin auth                    |
-| MinIO API  | `localhost:9000`         | `foliox` / `foliox12345`    |
+| MinIO API  | `localhost:9000`         | ver `.env` (`MINIO_*`)      |
 | MinIO Consola | `localhost:9001`      | idem                        |
 
 - PostgreSQL: 6 BDs (`foliox_auth`, `foliox_usuarios`, `foliox_expedientes`,

@@ -16,6 +16,7 @@ dist/
 # Environment (local-only: secrets live here, never commit)
 .env
 .env.*
+!.env.example
 
 # Logs
 *.log
@@ -24,3 +25,4 @@ dist/
 # OS junk
 Thumbs.db
 .DS_Store
+/META-INF/

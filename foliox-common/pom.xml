@@ -15,6 +15,13 @@
   <description>Tipos compartidos: enums, DTOs de error, excepciones</description>
 
   <dependencies>
+    <!-- Solo para compilar el EnvironmentPostProcessor; provided para no
+         arrastrarla (todo consumidor de common ya es una app Spring Boot). -->
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot</artifactId>
+      <scope>provided</scope>
+    </dependency>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
