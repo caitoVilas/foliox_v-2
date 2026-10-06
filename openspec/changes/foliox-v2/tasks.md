@@ -16,7 +16,7 @@ Fuente: spects.txt. El usuario aprueba tarea por tarea.
 - [x] 8. Expedientes service: crear/consultar con filtros (fuero/estado), borrado solo ADMIN — dep: 7
 
 ## Fase 3 — Documentos + Plantillas
-- [ ] 9. Documentos: upload PDF a MinIO, CRUD, asociación a expediente, baja solo si expediente CERRADO (o ADMIN) — dep: 2,7,8
+- [x] 9. Documentos: upload PDF a MinIO, CRUD, asociación a expediente, baja solo si expediente CERRADO (o ADMIN) — dep: 2,7,8
 - [ ] 10. Plantillas: CRUD global (id, tipo, contenido, versión, activo) + placeholders {{campo}} — dep: 9
 
 ## Fase 4 — Agenda + Notificaciones

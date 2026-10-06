@@ -4,15 +4,20 @@ spring:
   r2dbc:
     url: r2dbc:postgresql://localhost:5432/foliox_usuarios
     username: ${POSTGRES_USER:foliox}
-    password: ${POSTGRES_PASSWORD:foliox}
+    password: ${POSTGRES_PASSWORD}
 
 foliox:
+  # Sin default: un secret vacio degradaria el client a "public" en silencio
+  # (TokenController validaria solo el client_id). El EnvironmentPostProcessor
+  # aborta el boot si no resuelve a un valor real.
+  # spring.r2dbc.password se valida siempre; esto agrega el secret OAuth del client.
+  required-properties: foliox.auth.client.secret
   auth:
     issuer: http://localhost:8081
     token-ttl: 2h
     client:
       id: ${FOLIOX_CLIENT_ID:foliox-web}
-      secret: ${FOLIOX_CLIENT_SECRET:}
+      secret: ${FOLIOX_CLIENT_SECRET}
       default-scope: access
 
 server:
